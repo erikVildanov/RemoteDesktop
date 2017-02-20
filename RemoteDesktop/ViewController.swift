@@ -13,11 +13,14 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     let socket = SocketManager()
     let screenView = ScreenView()
     var size = CGSize()
+    var url = String()
     
     var arrayOfTickets:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         loadJson{
@@ -32,6 +35,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showMoreActions))
         tap.numberOfTapsRequired = 1
         screenView.imageView.addGestureRecognizer(tap)
+        print("ViewController",url)
         // Do any additional setup after loading the view, typically from a nib.
     }
 

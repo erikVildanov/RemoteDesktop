@@ -18,6 +18,17 @@
 		E30504C91E4CBB67001A1E9C /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30504C81E4CBB67001A1E9C /* WebSocket.swift */; };
 		E30504CB1E4CBC87001A1E9C /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30504CA1E4CBC87001A1E9C /* ScreenSize.swift */; };
 		E30504CE1E4CBFF1001A1E9C /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E30504CD1E4CBFF1001A1E9C /* libz.1.2.8.tbd */; };
+		E3EE63111E599DF1005A1EBF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63101E599DF1005A1EBF /* LoginView.swift */; };
+		E3EE63131E599E37005A1EBF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63121E599E37005A1EBF /* LoginViewController.swift */; };
+		E3EE63151E59AB3A005A1EBF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63141E59AB3A005A1EBF /* Reachability.swift */; };
+		E3EE63171E59ADA0005A1EBF /* WaitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63161E59ADA0005A1EBF /* WaitView.swift */; };
+		E3EE63191E59D75A005A1EBF /* DeskRollURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63181E59D75A005A1EBF /* DeskRollURL.swift */; };
+		E3EE631B1E59DBDC005A1EBF /* ClientTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE631A1E59DBDC005A1EBF /* ClientTableViewController.swift */; };
+		E3EE631D1E59DBFE005A1EBF /* ClientTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE631C1E59DBFE005A1EBF /* ClientTableView.swift */; };
+		E3EE631F1E59DC0D005A1EBF /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE631E1E59DC0D005A1EBF /* Client.swift */; };
+		E3EE63211E59DCC8005A1EBF /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63201E59DCC8005A1EBF /* FeedParser.swift */; };
+		E3EE63231E59E084005A1EBF /* ClientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63221E59E084005A1EBF /* ClientTableViewCell.swift */; };
+		E3EE63251E59E20A005A1EBF /* ClientTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63241E59E20A005A1EBF /* ClientTableDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +45,19 @@
 		E30504C81E4CBB67001A1E9C /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = ../../../../../Users/erik_vildanov/Desktop/sdfsadgf/sdfsadgf/WebSocket.swift; sourceTree = "<group>"; };
 		E30504CA1E4CBC87001A1E9C /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		E30504CD1E4CBFF1001A1E9C /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
+		E34EF50D1E5B21D700AEBD8B /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		E34EF50F1E5B220300AEBD8B /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		E3EE63101E599DF1005A1EBF /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E3EE63121E599E37005A1EBF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E3EE63141E59AB3A005A1EBF /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		E3EE63161E59ADA0005A1EBF /* WaitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitView.swift; sourceTree = "<group>"; };
+		E3EE63181E59D75A005A1EBF /* DeskRollURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeskRollURL.swift; sourceTree = "<group>"; };
+		E3EE631A1E59DBDC005A1EBF /* ClientTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewController.swift; sourceTree = "<group>"; };
+		E3EE631C1E59DBFE005A1EBF /* ClientTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableView.swift; sourceTree = "<group>"; };
+		E3EE631E1E59DC0D005A1EBF /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		E3EE63201E59DCC8005A1EBF /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedParser.swift; sourceTree = "<group>"; };
+		E3EE63221E59E084005A1EBF /* ClientTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableViewCell.swift; sourceTree = "<group>"; };
+		E3EE63241E59E20A005A1EBF /* ClientTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTableDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,17 +75,20 @@
 		8B92C95D1DCCBE2D00F51D8F /* SourceSocket */ = {
 			isa = PBXGroup;
 			children = (
+				8B92C9911DCCC4C600F51D8F /* SocketManager.swift */,
 				E30504C81E4CBB67001A1E9C /* WebSocket.swift */,
 			);
 			name = SourceSocket;
 			sourceTree = "<group>";
 		};
-		8B92C9901DCCC48F00F51D8F /* SocketIO */ = {
+		8B92C9901DCCC48F00F51D8F /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				8B92C9911DCCC4C600F51D8F /* SocketManager.swift */,
+				E3EE63141E59AB3A005A1EBF /* Reachability.swift */,
+				E3EE63201E59DCC8005A1EBF /* FeedParser.swift */,
+				E3EE63241E59E20A005A1EBF /* ClientTableDataSource.swift */,
 			);
-			name = SocketIO;
+			name = Other;
 			sourceTree = "<group>";
 		};
 		8BD363801D8D142300DB027F = {
@@ -84,7 +111,7 @@
 		8BD3638B1D8D142400DB027F /* RemoteDesktop */ = {
 			isa = PBXGroup;
 			children = (
-				8B92C9901DCCC48F00F51D8F /* SocketIO */,
+				8B92C9901DCCC48F00F51D8F /* Other */,
 				8B92C95D1DCCBE2D00F51D8F /* SourceSocket */,
 				8BD363A31D8D14EB00DB027F /* Model */,
 				8BD363A21D8D14E200DB027F /* Contriller */,
@@ -102,7 +129,11 @@
 		8BD363A11D8D14DD00DB027F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E3EE63161E59ADA0005A1EBF /* WaitView.swift */,
 				8BD363A41D8D154000DB027F /* ScreenView.swift */,
+				E3EE63101E599DF1005A1EBF /* LoginView.swift */,
+				E3EE631C1E59DBFE005A1EBF /* ClientTableView.swift */,
+				E3EE63221E59E084005A1EBF /* ClientTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -111,6 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				8BD3638E1D8D142400DB027F /* ViewController.swift */,
+				E3EE63121E599E37005A1EBF /* LoginViewController.swift */,
+				E3EE631A1E59DBDC005A1EBF /* ClientTableViewController.swift */,
 			);
 			name = Contriller;
 			sourceTree = "<group>";
@@ -119,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				E30504CA1E4CBC87001A1E9C /* ScreenSize.swift */,
+				E3EE63181E59D75A005A1EBF /* DeskRollURL.swift */,
+				E3EE631E1E59DC0D005A1EBF /* Client.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -126,6 +161,8 @@
 		E30504CC1E4CBFF1001A1E9C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E34EF50F1E5B220300AEBD8B /* libxml2.tbd */,
+				E34EF50D1E5B21D700AEBD8B /* libxml2.2.tbd */,
 				E30504CD1E4CBFF1001A1E9C /* libz.1.2.8.tbd */,
 			);
 			name = Frameworks;
@@ -204,13 +241,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3EE63131E599E37005A1EBF /* LoginViewController.swift in Sources */,
 				8BD3638F1D8D142400DB027F /* ViewController.swift in Sources */,
 				E30504C91E4CBB67001A1E9C /* WebSocket.swift in Sources */,
 				E30504CB1E4CBC87001A1E9C /* ScreenSize.swift in Sources */,
 				8BD3638D1D8D142400DB027F /* AppDelegate.swift in Sources */,
 				8BD363A51D8D154000DB027F /* ScreenView.swift in Sources */,
 				8B92C9921DCCC4C600F51D8F /* SocketManager.swift in Sources */,
+				E3EE63111E599DF1005A1EBF /* LoginView.swift in Sources */,
+				E3EE631F1E59DC0D005A1EBF /* Client.swift in Sources */,
+				E3EE631B1E59DBDC005A1EBF /* ClientTableViewController.swift in Sources */,
+				E3EE63231E59E084005A1EBF /* ClientTableViewCell.swift in Sources */,
+				E3EE63151E59AB3A005A1EBF /* Reachability.swift in Sources */,
+				E3EE63251E59E20A005A1EBF /* ClientTableDataSource.swift in Sources */,
+				E3EE63171E59ADA0005A1EBF /* WaitView.swift in Sources */,
+				E3EE63211E59DCC8005A1EBF /* FeedParser.swift in Sources */,
 				8BD363951D8D142400DB027F /* RemoteDesktop.xcdatamodeld in Sources */,
+				E3EE631D1E59DBFE005A1EBF /* ClientTableView.swift in Sources */,
+				E3EE63191E59D75A005A1EBF /* DeskRollURL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
