@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UIScrollViewDelegate {
 
-    let socket = SocketManager()
+    //var socket: SocketManager!
     let screenView = ScreenView()
     var size = CGSize()
     var url = String()
@@ -20,42 +20,88 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        size.width = 1280
+        size.height = 1024
         
+        let queue = DispatchQueue.global(qos: .utility)
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        loadJson{
-            self.screenView.imageView.image = self.screenView.drawCustomImage(size: self.size)
-            self.view = self.screenView
-            self.screenView.scrollView.delegate = self
-            self.initializeImageView()
-            self.setupGestureRecognizer()
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        queue.async{
+            while requestFlag == false {
+            print("sssssssss")
+                sleep(1)
         }
+            self.connectWS()
+        }
+        
+    }    
 
-        let tap = UITapGestureRecognizer(target: self, action: #selector(showMoreActions))
-        tap.numberOfTapsRequired = 1
-        screenView.imageView.addGestureRecognizer(tap)
-        print("ViewController",url)
-        // Do any additional setup after loading the view, typically from a nib.
+    func connectWS() {
+        url = (replaceMatches(pattern: "https", inString: url, withString: "wss")?.appending("ws"))!
+        
+        //socket = SocketManager(url: url)
+        
+        let ws = WebSocket(url)
+        
+        ws.event.open = {
+            print("opened")
+        }
+        
+        ws.event.message = { message in
+            if let text = message as? String {
+                let data = text.data(using: .utf8)!
+                
+                let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
+                
+                if let results = json["images"] as? [[String: AnyObject]] {
+                    
+                    for result in results {
+                        if let d = result["d"] as? String {
+                            print("image: " ,d)
+                            let dataDecoded : Data = Data(base64Encoded: d, options: .ignoreUnknownCharacters)!
+                            let decodedimage = UIImage(data: dataDecoded)
+                            self.screenView.imageView.image = decodedimage!
+                            //print(self.screenView.imageView.image?.size)
+                            self.view = self.screenView
+                            self.screenView.scrollView.delegate = self
+                            self.initializeImageView()
+                            self.setupGestureRecognizer()
+                            
+                        }
+                    }
+                    
+                }
+                //self.parser(data)
+            }
+        }
+        
+//        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//        loadJson{
+////            self.screenView.imageView.image = self.screenView.drawCustomImage(size: self.size)
+////            self.view = self.screenView
+////            self.screenView.scrollView.delegate = self
+////            self.initializeImageView()
+////            self.setupGestureRecognizer()
+//            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     
-    func loadJson(_ completion: ((Void) -> Void)?){
-        socket.parseFeed(completionHandler:
-            {
-                (json: CGSize) -> Void in
-                self.size = json
-                DispatchQueue.main.async(execute: {
-                    completion?()
-                })
-        })
-        
-    }
+//    func loadJson(_ completion: ((Void) -> Void)?){
+//        socket.parseFeed(completionHandler:
+//            {
+//                (json: CGSize) -> Void in
+//                self.size = json
+//                DispatchQueue.main.async(execute: {
+//                    completion?()
+//                })
+//        })
+//        
+//    }
     
     
     func initializeImageView(){
@@ -77,43 +123,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         centerScrollViewContents()
     }
     
-    func showMoreActions(touch: UITapGestureRecognizer) {
-        
-        let touchPoint = touch.location(in: self.screenView.imageView)
-        let circlePath = UIBezierPath(arcCenter: touchPoint, radius: CGFloat(20), startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
-        let color = getPixelColorAtPoint(point: touchPoint, sourceView: screenView.imageView).cgColor.components!
-        
-        socket.sendMessage("{\"jsonrpc\":\"2.0\",\"method\":\"event\",\"params\":{\"x\":\(touchPoint.x),\"y\":\(touchPoint.y),\"color\":{\"r\":\(color[0]*255),\"g\":\(color[1]*255),\"b\":\(color[3]*255)}},\"id\":2}")
-        
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = circlePath.cgPath
-        //change the fill color
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        //you can change the stroke color
-        shapeLayer.strokeColor = UIColor.red.cgColor
-        //you can change the line width
-        shapeLayer.lineWidth = 3.0
-        
-        screenView.imageView.layer.addSublayer(shapeLayer)
-        
-    }
-    
-    func getPixelColorAtPoint(point:CGPoint, sourceView: UIView) -> UIColor{
-        
-        let pixel = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: 4)
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
-        let context = CGContext(data: pixel, width: 1, height: 1, bitsPerComponent: 8, bytesPerRow: 4, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
-        
-        context!.translateBy(x: -point.x, y: -point.y)
-        sourceView.layer.render(in: context!)
-        let color:UIColor = UIColor(red: CGFloat(pixel[0])/255.0,
-                                    green: CGFloat(pixel[1])/255.0,
-                                    blue: CGFloat(pixel[2])/255.0,
-                                    alpha: CGFloat(pixel[3])/255.0)
-        pixel.deallocate(capacity: 4)
-        return color
-    }
     
     func centerScrollViewContents(){
         let boundsSize = screenView.scrollView.bounds.size
@@ -152,6 +161,13 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     func deviceDidRotate(_ notification: Notification)
     {
         centerScrollViewContents()
+    }
+    
+    func replaceMatches(pattern: String, inString string: String, withString replacementString: String) -> String? {
+        let regex = try! NSRegularExpression(pattern: pattern, options: .allowCommentsAndWhitespace)
+        let range = NSMakeRange(0, string.characters.count)
+        
+        return regex.stringByReplacingMatches(in: string, options: .anchored, range: range, withTemplate: replacementString)
     }
 }
 

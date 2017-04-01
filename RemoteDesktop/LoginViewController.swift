@@ -45,10 +45,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         let urlString: NSString = request.url!.absoluteString as NSString
-        let url: NSURL = request.url! as URL as NSURL
-        //let urlParts = url.pathComponents
-        
-        print("URL:", urlString)
         
         if urlString == "https://deskroll.com/my/start/" {
             let clientTableViewController = ClientTableViewController()
@@ -56,6 +52,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
             clientTableViewController.request = NSURLRequest(url: NSURL(string: "https://deskroll.com/my/rd/list.php?") as! URL)
             clientTableViewController.modalTransitionStyle = .crossDissolve
             self.navigationController?.pushViewController(clientTableViewController, animated: false)
+            loginView.webView.removeFromSuperview()
         }
         return true
     }

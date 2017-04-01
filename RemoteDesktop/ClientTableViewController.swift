@@ -58,7 +58,6 @@ class ClientTableViewController: UIViewController, UITableViewDelegate, UIWebVie
         
         let logOutButton = UIBarButtonItem(image: UIImage(named: "Exit"), style: .plain, target: self, action: #selector(logout))
         self.navigationItem.setRightBarButton(logOutButton, animated: true)
-        
     }
     
     func logout() {
@@ -86,11 +85,17 @@ class ClientTableViewController: UIViewController, UITableViewDelegate, UIWebVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        request = NSURLRequest(url: NSURL(string: "https://deskroll.com/my/rd/connect.php?guid=".appending(feedParser.client.value[indexPath.row])) as! URL)
+        request = NSURLRequest(url: URL(string: "https://deskroll.com/my/rd/connect.php?guid=".appending(feedParser.client.value[indexPath.row]))!)
+        
         webView.loadRequest(request as URLRequest)
     }
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        
+        
+        //редирект 302
+        
+        //webView.responds(to: <#T##Selector!#>)
         
         let urlString: NSString = request.url!.absoluteString as NSString
         let url: NSURL = request.url! as URL as NSURL
@@ -101,10 +106,10 @@ class ClientTableViewController: UIViewController, UITableViewDelegate, UIWebVie
             viewController.url = urlString as String
             viewController.modalTransitionStyle = .crossDissolve
             self.navigationController?.pushViewController(viewController, animated: false)
+            self.webView.removeFromSuperview()
+            return true
         }
-        
         return true
     }
-    
 
 }

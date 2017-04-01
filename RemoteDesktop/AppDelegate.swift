@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        DispatchQueue.global().async {
+        
+        URLProtocol.registerClass(MyURLProtocol.self)
+        
+        }
         // Override point for customization after application launch.
         let nav = UINavigationController()
         let mainWiew = LoginViewController(nibName: nil, bundle: nil)
