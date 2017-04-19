@@ -15,7 +15,7 @@ class FeedParser {
     private var parserCompletionHandler:((Client) -> Void)?
     
     
-    func parseFeed (request: NSURLRequest, completionHandler: ((Client) -> Void)?) -> Void {
+    func parseFeed (request: URLRequest, completionHandler: ((Client) -> Void)?) -> Void {
         self.parserCompletionHandler = completionHandler
         
         let urlSession = URLSession.shared
@@ -23,7 +23,7 @@ class FeedParser {
             (data, respouse, error) -> Void in
             
             if error != nil {
-                print("\(error?.localizedDescription)")
+                print("\(String(describing: error?.localizedDescription))")
             }
             self.parser(data: data!)
         })

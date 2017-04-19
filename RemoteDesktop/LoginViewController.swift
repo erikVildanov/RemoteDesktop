@@ -14,10 +14,11 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     let loginView = LoginView()
     let waitView = WaitView()
     let deskRollURL = DeskRollURL()
-    var request: NSURLRequest!
+    var request: URLRequest!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.hidesBackButton = true
         loginView.webView.delegate = self
         view = loginView
         navigationItem.title = "LogIn DeskRoll"
@@ -35,7 +36,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         
         if Reachability.connectedToNetwork() == true {
             let urlString = deskRollURL.baseURL.appendingFormat(deskRollURL.loginURL)
-            request = NSURLRequest(url: NSURL(string: urlString) as! URL)
+            request = URLRequest(url: URL(string: urlString)!)
             loginView.webView.loadRequest(request as URLRequest)
         } else {
             let alert = UIAlertController(title: "Соединение не установлено", message: "проверьте соединение с интернетом", preferredStyle: UIAlertControllerStyle.alert)
@@ -48,8 +49,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         
         if urlString == "https://deskroll.com/my/start/" {
             let clientTableViewController = ClientTableViewController()
-            clientTableViewController.webView = loginView.webView
-            clientTableViewController.request = NSURLRequest(url: NSURL(string: "https://deskroll.com/my/rd/list.php?") as! URL)
+            clientTableViewController.request = URLRequest(url: URL(string: "https://deskroll.com/my/rd/list.php?")!)
             clientTableViewController.modalTransitionStyle = .crossDissolve
             self.navigationController?.pushViewController(clientTableViewController, animated: false)
             loginView.webView.removeFromSuperview()

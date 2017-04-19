@@ -17,11 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        DispatchQueue.global().async {
-        
-        URLProtocol.registerClass(MyURLProtocol.self)
-        
-        }
         // Override point for customization after application launch.
         let nav = UINavigationController()
         let mainWiew = LoginViewController(nibName: nil, bundle: nil)
@@ -31,17 +26,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = UIColor.gray
         UINavigationBar.appearance().tintColor = UIColor.white
         
-        //White status font
         UINavigationBar.appearance().barStyle = UIBarStyle.blackTranslucent
         
         self.window!.rootViewController = nav
         self.window?.makeKeyAndVisible()
         
-        //Black status background
-        let statusBar = UIView()
-        statusBar.frame = CGRect(x: 0, y: 0, width: 320, height: 20)
-        statusBar.backgroundColor = UIColor.black
-        self.window?.rootViewController?.view.addSubview(statusBar)
+        let f = self.window?.frame
+        self.window?.frame = CGRect(x: 0, y: 0, width: f!.size.width, height: f!.size.height)
+        
+        if let sb = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView {
+            sb.backgroundColor = UIColor.black
+        }
+
         return true
     }
 

@@ -15,10 +15,9 @@
 		8BD363971D8D142400DB027F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BD363961D8D142400DB027F /* Assets.xcassets */; };
 		8BD3639A1D8D142400DB027F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BD363981D8D142400DB027F /* LaunchScreen.storyboard */; };
 		8BD363A51D8D154000DB027F /* ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD363A41D8D154000DB027F /* ScreenView.swift */; };
-		E30504CB1E4CBC87001A1E9C /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30504CA1E4CBC87001A1E9C /* ScreenSize.swift */; };
+		E30504CB1E4CBC87001A1E9C /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30504CA1E4CBC87001A1E9C /* Images.swift */; };
 		E30504CE1E4CBFF1001A1E9C /* libz.1.2.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E30504CD1E4CBFF1001A1E9C /* libz.1.2.8.tbd */; };
 		E34AD7901E6ABD680057BBF6 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34AD78F1E6ABD680057BBF6 /* WebSocket.swift */; };
-		E3BA496C1E6AED3A00C900AE /* MyURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BA496B1E6AED3A00C900AE /* MyURLProtocol.swift */; };
 		E3EE63111E599DF1005A1EBF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63101E599DF1005A1EBF /* LoginView.swift */; };
 		E3EE63131E599E37005A1EBF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63121E599E37005A1EBF /* LoginViewController.swift */; };
 		E3EE63151E59AB3A005A1EBF /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63141E59AB3A005A1EBF /* Reachability.swift */; };
@@ -43,12 +42,11 @@
 		8BD363991D8D142400DB027F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BD3639B1D8D142400DB027F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BD363A41D8D154000DB027F /* ScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenView.swift; sourceTree = "<group>"; };
-		E30504CA1E4CBC87001A1E9C /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		E30504CA1E4CBC87001A1E9C /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		E30504CD1E4CBFF1001A1E9C /* libz.1.2.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.8.tbd; path = usr/lib/libz.1.2.8.tbd; sourceTree = SDKROOT; };
 		E34AD78F1E6ABD680057BBF6 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		E34EF50D1E5B21D700AEBD8B /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		E34EF50F1E5B220300AEBD8B /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
-		E3BA496B1E6AED3A00C900AE /* MyURLProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyURLProtocol.swift; sourceTree = "<group>"; };
 		E3EE63101E599DF1005A1EBF /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		E3EE63121E599E37005A1EBF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E3EE63141E59AB3A005A1EBF /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 			children = (
 				E34AD78F1E6ABD680057BBF6 /* WebSocket.swift */,
 				8B92C9911DCCC4C600F51D8F /* SocketManager.swift */,
-				E3BA496B1E6AED3A00C900AE /* MyURLProtocol.swift */,
 			);
 			name = SourceSocket;
 			sourceTree = "<group>";
@@ -154,7 +151,7 @@
 		8BD363A31D8D14EB00DB027F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E30504CA1E4CBC87001A1E9C /* ScreenSize.swift */,
+				E30504CA1E4CBC87001A1E9C /* Images.swift */,
 				E3EE63181E59D75A005A1EBF /* DeskRollURL.swift */,
 				E3EE631E1E59DC0D005A1EBF /* Client.swift */,
 			);
@@ -246,9 +243,8 @@
 			files = (
 				E3EE63131E599E37005A1EBF /* LoginViewController.swift in Sources */,
 				8BD3638F1D8D142400DB027F /* ViewController.swift in Sources */,
-				E30504CB1E4CBC87001A1E9C /* ScreenSize.swift in Sources */,
+				E30504CB1E4CBC87001A1E9C /* Images.swift in Sources */,
 				8BD3638D1D8D142400DB027F /* AppDelegate.swift in Sources */,
-				E3BA496C1E6AED3A00C900AE /* MyURLProtocol.swift in Sources */,
 				8BD363A51D8D154000DB027F /* ScreenView.swift in Sources */,
 				8B92C9921DCCC4C600F51D8F /* SocketManager.swift in Sources */,
 				E3EE63111E599DF1005A1EBF /* LoginView.swift in Sources */,

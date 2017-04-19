@@ -10,7 +10,7 @@ import UIKit
 
 class SocketManager: NSObject {
     
-    var screenSize = CGSize()
+    var curRes = Int()
     var ws: WebSocket
     fileprivate var parserCompletionHandler:((CGSize) -> Void )?
     
@@ -18,39 +18,63 @@ class SocketManager: NSObject {
         ws = WebSocket(url)
     }
     
-    func parseFeed (completionHandler: ((CGSize) -> Void)?) -> Void {
+    
+    func getimage(_ data: Data) -> (Images) {
+        let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
+        let imageModel = Images()
         
-        self.parserCompletionHandler = completionHandler
-            
-            ws.event.open = {
-                print("opened")
-            }
-            
-            ws.event.message = { message in
-                if let text = message as? String {
-                    let data = text.data(using: .utf8)!
-                    print(text)
-                    self.parser(data)
+        if let images = json["images"] as? [[String: AnyObject]] {
+            for image in images {
+                let d = image["d"] as? String
+                    let dataDecoded : Data = Data(base64Encoded: d!, options: .ignoreUnknownCharacters)!
+                    imageModel.image = UIImage(data: dataDecoded)!
+
+                if let x = Int(image["x"] as! String) {
+                    imageModel.x = x
+                }
+                
+                if let y = Int(image["y"] as! String) {
+                    imageModel.y = y
                 }
             }
+        }
+        
+        return imageModel
+    }
+    
+    func SessionStarted(_ data: Data) -> Bool {
+        let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
+        
+        if let session = json["session"] as? [String: AnyObject] {
+            if session["started"] as? Int == 1 {
+                return true
+            }
+        }
+        return false
         
     }
     
-    func parser(_ data: Data){
+    func parserScreen(_ data: Data) -> CGSize!{
+        
+        var screenSize = CGSize()
         
         let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         
-        if let results = json["images"] as? [[String: AnyObject]] {
-            
-            for result in results {
-                if let d = result["d"] as? String {
-                    print("image")
-                }
+        if let destop = json["desktop"] as? [String: AnyObject] {
+            if let displays = destop["displays"] as? [[String: AnyObject]] {
+                    
+                    if let isCaptured = Int(displays[0]["isCaptured"] as! String) {
+                    
+                    if let resolutions = displays[0]["resolutions"] as? [[String: AnyObject]]{
+                        screenSize.height = CGFloat(Int(resolutions[isCaptured]["height"] as! String)!)
+                        screenSize.width = CGFloat(Int(resolutions[isCaptured]["width"] as! String)!)
+                    }
+                    }
+
+                
             }
-            
         }
-        
-        parserCompletionHandler?(screenSize)
+        return screenSize
     }
     
 }

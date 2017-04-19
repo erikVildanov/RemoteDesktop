@@ -6,13 +6,12 @@
 //  Copyright © 2017 ErikVildanov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class ScreenSize {
+class Images {
     
-    var widht: Int = 0
-    var height: Int = 0
-    
-    
+    var x: Int = 0
+    var y: Int = 0
+    var image = UIImage()
     
 }

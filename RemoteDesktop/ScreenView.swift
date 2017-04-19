@@ -12,8 +12,7 @@ class ScreenView: UIView {
     
     var imageView = UIImageView()
     var scrollView = UIScrollView()
-    var image = UIImage()
-    var screenSize = ScreenSize()
+    //var image = UIImage()
     
     override init (frame: CGRect) {
         super.init(frame: frame)
@@ -33,6 +32,8 @@ class ScreenView: UIView {
     }
     
     func initializeView(){
+        self.imageView.isMultipleTouchEnabled = true
+        self.imageView.isUserInteractionEnabled = true
         
         scrollView.panGestureRecognizer.minimumNumberOfTouches = 2
         scrollView.panGestureRecognizer.maximumNumberOfTouches = 2

@@ -30,7 +30,7 @@ class ClientTableView: UIView {
     func initializeView(){
         addSubview(tableView)
 
-        UIApplication.shared.statusBarStyle = .lightContent
+        //UIApplication.shared.statusBarStyle = .lightContent
         tableView.estimatedRowHeight = 109
         tableView.rowHeight = UITableViewAutomaticDimension
         let viewsDict = [

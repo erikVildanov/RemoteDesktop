@@ -8,18 +8,17 @@
 
 import UIKit
 
-class ClientTableViewController: UIViewController, UITableViewDelegate, UIWebViewDelegate {
+class ClientTableViewController: UIViewController, UITableViewDelegate {
 
     let clientTableDataSource = ClientTableDataSource()
     let clientTableView = ClientTableView()
     let refreshControl = UIRefreshControl()
-    var request = NSURLRequest()
-    var webView = UIWebView()
+    var request: URLRequest!
     let feedParser = FeedParser()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.delegate = self
+        self.navigationItem.hidesBackButton = true
         clientTableView.tableView.delegate = self
         refreshTable()
         createBarButtonLogOut()
@@ -32,8 +31,7 @@ class ClientTableViewController: UIViewController, UITableViewDelegate, UIWebVie
         }
         clientTableDataSource.client = feedParser.client
         clientTableView.tableView.dataSource = clientTableDataSource
-
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,11 +49,9 @@ class ClientTableViewController: UIViewController, UITableViewDelegate, UIWebVie
                     completion?()
                 })
         })
-        
     }
     
     func createBarButtonLogOut(){
-        
         let logOutButton = UIBarButtonItem(image: UIImage(named: "Exit"), style: .plain, target: self, action: #selector(logout))
         self.navigationItem.setRightBarButton(logOutButton, animated: true)
     }
@@ -85,31 +81,29 @@ class ClientTableViewController: UIViewController, UITableViewDelegate, UIWebVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        request = NSURLRequest(url: URL(string: "https://deskroll.com/my/rd/connect.php?guid=".appending(feedParser.client.value[indexPath.row]))!)
-        
-        webView.loadRequest(request as URLRequest)
-    }
-    
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        
-        
-        //редирект 302
-        
-        //webView.responds(to: <#T##Selector!#>)
-        
-        let urlString: NSString = request.url!.absoluteString as NSString
-        let url: NSURL = request.url! as URL as NSURL
-        let urlParts = url.pathComponents
-        
-        if urlParts?.count == 3 && urlParts?[1] != "plugins"{
+        request = URLRequest(url: URL(string: "https://deskroll.com/my/rd/connect.php?guid=".appending(feedParser.client.value[indexPath.row]))!)
+        redirectURL(request: request) {
+            url in
+            DispatchQueue.main.sync {
             let viewController = ViewController()
-            viewController.url = urlString as String
+            viewController.url = url.absoluteString
             viewController.modalTransitionStyle = .crossDissolve
             self.navigationController?.pushViewController(viewController, animated: false)
-            self.webView.removeFromSuperview()
-            return true
+            }
         }
-        return true
     }
-
+    
+    func redirectURL(request : URLRequest, successHandler: @escaping (_ response: URL) -> Void){
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) {
+            data, response, error in
+            
+            if error != nil {
+                print("error=\(String(describing: error))")
+                return
+            }
+            successHandler((response?.url)!);
+        }
+        task.resume()
+    }
 }
