@@ -13,8 +13,8 @@ class ClientTableViewController: UIViewController, UITableViewDelegate {
     let clientTableDataSource = ClientTableDataSource()
     let clientTableView = ClientTableView()
     let refreshControl = UIRefreshControl()
-    var request: URLRequest!
     let feedParser = FeedParser()
+    let waitView = WaitView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class ClientTableViewController: UIViewController, UITableViewDelegate {
     
 
     func loadJson(_ completion: ((Void) -> Void)?){
-        feedParser.parseFeed(request: request , completionHandler:
+        feedParser.parseFeed(request: URLRequest(url: URL(string: "https://deskroll.com/my/rd/list.php?")!) , completionHandler:
             {
                 (json: Client) -> Void in
                 self.clientTableDataSource.client = json
@@ -81,7 +81,9 @@ class ClientTableViewController: UIViewController, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        request = URLRequest(url: URL(string: "https://deskroll.com/my/rd/connect.php?guid=".appending(feedParser.client.value[indexPath.row]))!)
+        waitView.frame = view.frame
+        view.addSubview(waitView)
+        let request = URLRequest(url: URL(string: "https://deskroll.com/my/rd/connect.php?guid=".appending(feedParser.client.value[indexPath.row]))!)
         redirectURL(request: request) {
             url in
             DispatchQueue.main.sync {
@@ -89,6 +91,7 @@ class ClientTableViewController: UIViewController, UITableViewDelegate {
             viewController.url = url.absoluteString
             viewController.modalTransitionStyle = .crossDissolve
             self.navigationController?.pushViewController(viewController, animated: false)
+            self.waitView.removeFromSuperview()
             }
         }
     }

@@ -14,11 +14,15 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     let screenView = ScreenView()
     var size = CGSize(width: 0, height: 0)
     var url = String()
+    let waitView = WaitView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        waitView.frame = view.frame
+        view.addSubview(waitView)
         postURL(urlString: url, successHandler: {
             self.connectWS()
+            self.waitView.removeFromSuperview()
         })
     }
     

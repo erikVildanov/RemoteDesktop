@@ -49,7 +49,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         
         if urlString == "https://deskroll.com/my/start/" {
             let clientTableViewController = ClientTableViewController()
-            clientTableViewController.request = URLRequest(url: URL(string: "https://deskroll.com/my/rd/list.php?")!)
             clientTableViewController.modalTransitionStyle = .crossDissolve
             self.navigationController?.pushViewController(clientTableViewController, animated: false)
             loginView.webView.removeFromSuperview()
