@@ -20,7 +20,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         postURL(urlString: url, successHandler: {
             self.connectWS()
         })
-        setupGestureRecognizer()
     }
     
     override func viewWillLayoutSubviews() {
@@ -81,6 +80,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     self.screenView.scrollView.delegate = self
                     self.screenView.imageView.frame = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
                     self.screenView.scrollView.contentSize = self.size
+                    self.setupGestureRecognizer()
                     self.setZoomScale()
                     UIGraphicsBeginImageContext(self.size)
                 } else if self.size.height > 0{
@@ -161,24 +161,22 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         
         if touch.state == .began {
             touchBegan = touchPoint
-            let p2p = ["et":"1","x":"\(Int(touchPoint.x))","y":"\(Int(touchPoint.y))","b":"1","bs":"1","sx":"0","sy":"0"]
-            let data: Data = try! JSONSerialization.data(withJSONObject: p2p, options: .prettyPrinted)
-            let datastring = String(data: data, encoding: .utf8)
-            print(datastring ?? "")
-            socket.ws.send(datastring ?? "")
+            let mouseDown = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "1","bs": "1","sx": "0","sy": "0"]]]
+            let data = try! JSONSerialization.data(withJSONObject: mouseDown, options: [])
+            let jsonString = String(data: data, encoding: .utf8)!
+            socket.sendMessage(jsonString)
         } else if touch.state == .ended {
-            let p2p = ["et":"1","x":"\(Int(touchPoint.x))","y":"\(Int(touchPoint.y))","b":"1","bs":"2","sx":"0","sy":"0"]
-            let data: Data = try! JSONSerialization.data(withJSONObject: p2p, options: .prettyPrinted)
-            let datastring = String(data: data, encoding: .utf8)
-            print(datastring ?? "")
-            socket.ws.send(datastring ?? "")
+            let mouseUp = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "1","bs": "2","sx": "0","sy": "0"]]]
+            let data = try! JSONSerialization.data(withJSONObject: mouseUp, options: [])
+            let jsonString = String(data: data, encoding: .utf8)!
+            socket.sendMessage(jsonString)
         }
 //        else if touch.state == .changed && (Int(touchBegan.x) != Int(touchPoint.x) || Int(touchBegan.y) != Int(touchPoint.y)){
-//            let p2p = ["et":"1","x":"\(Int(touchPoint.x))","y":"\(Int(touchPoint.y))","b":"0","bs":"0","sx":"0","sy":"0"]
-//            let data: Data = try! JSONSerialization.data(withJSONObject: p2p, options: .prettyPrinted)
-//            socket.ws.send(data)
+//            let mouseMove = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "0","bs": "0","sx": "0","sy": "0"]]]
+//            let data = try! JSONSerialization.data(withJSONObject: mouseMove, options: [])
+//            let jsonString = String(data: data, encoding: .utf8)!
+//            socket.sendMessage(jsonString)
 //        }
-        
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {

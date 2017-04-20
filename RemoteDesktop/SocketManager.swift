@@ -77,4 +77,7 @@ class SocketManager: NSObject {
         return screenSize
     }
     
+    func sendMessage(_ message: String){
+        ws.send(text: message)
+        }
 }
