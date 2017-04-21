@@ -86,7 +86,7 @@ class ClientTableViewController: UIViewController, UITableViewDelegate {
         let request = URLRequest(url: URL(string: "https://deskroll.com/my/rd/connect.php?guid=".appending(feedParser.client.value[indexPath.row]))!)
         redirectURL(request: request) {
             url in
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
             let viewController = ViewController()
             viewController.url = url.absoluteString
             viewController.modalTransitionStyle = .crossDissolve

@@ -121,18 +121,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let heightScale = scrollViewSize.height / imageViewSize.height
         
         screenView.scrollView.minimumZoomScale = min(widthScale, heightScale)
-        screenView.scrollView.maximumZoomScale = max(widthScale, heightScale)
+        screenView.scrollView.maximumZoomScale = 2//max(widthScale, heightScale)
         screenView.scrollView.zoomScale = min(widthScale, heightScale)
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-//        let imageViewSize = screenView.imageView.frame.size
-//        let scrollViewSize = screenView.scrollView.bounds.size
-//        
-//        let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
-//        let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
-//        
-//        screenView.scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
         let boundsSize = screenView.scrollView.bounds.size
         var contentsFrame = screenView.imageView.frame
         
@@ -152,35 +145,76 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func setupGestureRecognizer() {
-        let tap = UILongPressGestureRecognizer(target: self, action: #selector(tapActions))
-        tap.minimumPressDuration = 0
-        screenView.imageView.addGestureRecognizer(tap)
+        let singleTap = UILongPressGestureRecognizer(target: self, action: #selector(tapActions))
+        singleTap.minimumPressDuration = 0
+        singleTap.numberOfTouchesRequired = 1
+        screenView.imageView.addGestureRecognizer(singleTap)
+        
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapAction))
+        doubleTap.numberOfTapsRequired = 2
+        screenView.imageView.addGestureRecognizer(doubleTap)
+        
+        let rightTap = UILongPressGestureRecognizer(target: self, action: #selector(rightTapAction))
+        rightTap.minimumPressDuration = 1
+        rightTap.numberOfTouchesRequired = 1
+        screenView.imageView.addGestureRecognizer(rightTap)
+        
+        singleTap.require(toFail: doubleTap)
+        singleTap.require(toFail: rightTap)
         
     }
     
+    func doubleTapAction(touch: UITapGestureRecognizer) {
+//            let touchPoint = touch.location(in: self.screenView.imageView)
+//            
+//            if touch.state == .began {
+//                print("DoubleTupped")
+//                let mouseDown = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "1","bs": "1","sx": "0","sy": "0"]]]
+//                let data = try! JSONSerialization.data(withJSONObject: mouseDown, options: [])
+//                let jsonString = String(data: data, encoding: .utf8)!
+//                socket.sendMessage(jsonString)
+//            } else if touch.state == .ended {
+//                print("DoubleTupped")
+//                let mouseUp = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "1","bs": "2","sx": "0","sy": "0"]]]
+//                let data = try! JSONSerialization.data(withJSONObject: mouseUp, options: [])
+//                let jsonString = String(data: data, encoding: .utf8)!
+//                socket.sendMessage(jsonString)
+//            }
+    }
+    
+    func rightTapAction(touch: UILongPressGestureRecognizer) {
+            let touchPoint = touch.location(in: self.screenView.imageView)
+            if touch.state == .began {
+                print("rightActionDown")
+                let mouseDown = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "3","bs": "1","sx": "0","sy": "0"]]]
+                let data = try! JSONSerialization.data(withJSONObject: mouseDown, options: [])
+                let jsonString = String(data: data, encoding: .utf8)!
+                socket.sendMessage(jsonString)
+            } else if touch.state == .ended {
+                print("rightActionUP")
+                let mouseUp = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "3","bs": "2","sx": "0","sy": "0"]]]
+                let data = try! JSONSerialization.data(withJSONObject: mouseUp, options: [])
+                let jsonString = String(data: data, encoding: .utf8)!
+                socket.sendMessage(jsonString)
+            }
+    }
+    
     func tapActions(touch: UILongPressGestureRecognizer) {
-        
         let touchPoint = touch.location(in: self.screenView.imageView)
-        var touchBegan = CGPoint()
         
         if touch.state == .began {
-            touchBegan = touchPoint
+            print("TupActionDown")
             let mouseDown = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "1","bs": "1","sx": "0","sy": "0"]]]
             let data = try! JSONSerialization.data(withJSONObject: mouseDown, options: [])
             let jsonString = String(data: data, encoding: .utf8)!
             socket.sendMessage(jsonString)
         } else if touch.state == .ended {
+            print("TupActionUP")
             let mouseUp = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "1","bs": "2","sx": "0","sy": "0"]]]
             let data = try! JSONSerialization.data(withJSONObject: mouseUp, options: [])
             let jsonString = String(data: data, encoding: .utf8)!
             socket.sendMessage(jsonString)
         }
-//        else if touch.state == .changed && (Int(touchBegan.x) != Int(touchPoint.x) || Int(touchBegan.y) != Int(touchPoint.y)){
-//            let mouseMove = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "0","bs": "0","sx": "0","sy": "0"]]]
-//            let data = try! JSONSerialization.data(withJSONObject: mouseMove, options: [])
-//            let jsonString = String(data: data, encoding: .utf8)!
-//            socket.sendMessage(jsonString)
-//        }
     }
     
     override func willMove(toParentViewController parent: UIViewController?) {
