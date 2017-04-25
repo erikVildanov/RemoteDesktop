@@ -15,6 +15,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     var size = CGSize(width: 0, height: 0)
     var url = String()
     let waitView = WaitView()
+    var mouseEvent = MouseEvent()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +23,12 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         view.addSubview(waitView)
         postURL(urlString: url, successHandler: {
             self.connectWS()
+            self.view = self.screenView
             self.waitView.removeFromSuperview()
         })
     }
     
     override func viewWillLayoutSubviews() {
-        
         switch UIDevice.current.orientation {
         case .landscapeLeft, .landscapeRight:
             navigationController?.isNavigationBarHidden = true
@@ -78,11 +79,10 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     print("started false")
                     return }
                 
-                if self.socket.parserScreen(data).height > 0 {
+                if self.size.height == 0 {
                     self.size = self.socket.parserScreen(data)
-                    self.view = self.screenView
                     self.screenView.scrollView.delegate = self
-                    self.screenView.imageView.frame = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+                    self.screenView.imageView.bounds = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
                     self.screenView.scrollView.contentSize = self.size
                     self.setupGestureRecognizer()
                     self.setZoomScale()
@@ -152,6 +152,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapAction))
         doubleTap.numberOfTapsRequired = 2
+        doubleTap.numberOfTouchesRequired = 1
         screenView.imageView.addGestureRecognizer(doubleTap)
         
         let rightTap = UILongPressGestureRecognizer(target: self, action: #selector(rightTapAction))
@@ -165,55 +166,41 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func doubleTapAction(touch: UITapGestureRecognizer) {
-//            let touchPoint = touch.location(in: self.screenView.imageView)
-//            
-//            if touch.state == .began {
-//                print("DoubleTupped")
-//                let mouseDown = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "1","bs": "1","sx": "0","sy": "0"]]]
-//                let data = try! JSONSerialization.data(withJSONObject: mouseDown, options: [])
-//                let jsonString = String(data: data, encoding: .utf8)!
-//                socket.sendMessage(jsonString)
-//            } else if touch.state == .ended {
-//                print("DoubleTupped")
-//                let mouseUp = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "1","bs": "2","sx": "0","sy": "0"]]]
-//                let data = try! JSONSerialization.data(withJSONObject: mouseUp, options: [])
-//                let jsonString = String(data: data, encoding: .utf8)!
-//                socket.sendMessage(jsonString)
-//            }
+        let touchPoint = touch.location(in: self.screenView.imageView)
+        if touch.state == .ended {
+            mouseEvent = MouseEvent(x: Int(touchPoint.x), y: Int(touchPoint.y), b: 1, bs: 1)
+            mouseEvent.addEvent()
+            mouseEvent.addEvent()
+            mouseEvent.bs = 2
+            mouseEvent.addEvent()
+            socket.sendMessage(mouseEvent.toString())
+        }
     }
     
     func rightTapAction(touch: UILongPressGestureRecognizer) {
             let touchPoint = touch.location(in: self.screenView.imageView)
-            if touch.state == .began {
-                print("rightActionDown")
-                let mouseDown = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "3","bs": "1","sx": "0","sy": "0"]]]
-                let data = try! JSONSerialization.data(withJSONObject: mouseDown, options: [])
-                let jsonString = String(data: data, encoding: .utf8)!
-                socket.sendMessage(jsonString)
-            } else if touch.state == .ended {
-                print("rightActionUP")
-                let mouseUp = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "3","bs": "2","sx": "0","sy": "0"]]]
-                let data = try! JSONSerialization.data(withJSONObject: mouseUp, options: [])
-                let jsonString = String(data: data, encoding: .utf8)!
-                socket.sendMessage(jsonString)
-            }
+        if touch.state == .began {
+            mouseEvent = MouseEvent(x: Int(touchPoint.x), y: Int(touchPoint.y), b: 3, bs: 1)
+            mouseEvent.addEvent()
+        } else if touch.state == .ended {
+            mouseEvent.bs = 2
+            mouseEvent.addEvent()
+            self.socket.sendMessage(self.mouseEvent.toString())
+        }
     }
     
     func tapActions(touch: UILongPressGestureRecognizer) {
         let touchPoint = touch.location(in: self.screenView.imageView)
         
         if touch.state == .began {
-            print("TupActionDown")
-            let mouseDown = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "1","bs": "1","sx": "0","sy": "0"]]]
-            let data = try! JSONSerialization.data(withJSONObject: mouseDown, options: [])
-            let jsonString = String(data: data, encoding: .utf8)!
-            socket.sendMessage(jsonString)
+            mouseEvent = MouseEvent(x: Int(touchPoint.x), y: Int(touchPoint.y), b: 1, bs: 1)
+            mouseEvent.addEvent()
         } else if touch.state == .ended {
-            print("TupActionUP")
-            let mouseUp = ["events":[["et": "1","x": "\(Int(touchPoint.x))","y": "\(Int(touchPoint.y))","b": "1","bs": "2","sx": "0","sy": "0"]]]
-            let data = try! JSONSerialization.data(withJSONObject: mouseUp, options: [])
-            let jsonString = String(data: data, encoding: .utf8)!
-            socket.sendMessage(jsonString)
+            mouseEvent.bs = 2
+            mouseEvent.x = Int(touchPoint.x)
+            mouseEvent.y = Int(touchPoint.y)
+            mouseEvent.addEvent()
+            self.socket.sendMessage(self.mouseEvent.toString())
         }
     }
     

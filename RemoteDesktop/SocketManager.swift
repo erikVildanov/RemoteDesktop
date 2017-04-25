@@ -63,21 +63,27 @@ class SocketManager: NSObject {
         if let destop = json["desktop"] as? [String: AnyObject] {
             if let displays = destop["displays"] as? [[String: AnyObject]] {
                     
-                    if let isCaptured = Int(displays[0]["isCaptured"] as! String) {
+                    if let isCaptured = Int(displays[0]["curRes"] as! String) {
                     
                     if let resolutions = displays[0]["resolutions"] as? [[String: AnyObject]]{
-                        screenSize.height = CGFloat(Int(resolutions[isCaptured]["height"] as! String)!)
-                        screenSize.width = CGFloat(Int(resolutions[isCaptured]["width"] as! String)!)
+                        screenSize.height = CGFloat(Int(resolutions[isCaptured - 1]["height"] as! String)!)
+                        screenSize.width = CGFloat(Int(resolutions[isCaptured - 1]["width"] as! String)!)
                     }
                     }
 
                 
             }
+        } else if let images = json["images"] as? [[String: AnyObject]] {
+            screenSize.height = CGFloat(Int(images[0]["sh"] as! String)!)
+            screenSize.width = CGFloat(Int(images[0]["sw"] as! String)!)
         }
         return screenSize
     }
     
+    
+    
     func sendMessage(_ message: String){
-        ws.send(text: message)
+        print(message)
+        ws.send(message)
         }
 }
