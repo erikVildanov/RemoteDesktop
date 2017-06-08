@@ -36,8 +36,16 @@ class ClientTableViewCell: UITableViewCell {
             "stasus" : stasus
             ] as [String : Any]
         
-        iconImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
-        iconImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        if #available(iOS 9.0, *) {
+            iconImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
+        } else {
+            addConstraint(NSLayoutConstraint(item: iconImage, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1.0, constant: 0))
+        }
+        if #available(iOS 9.0, *) {
+            iconImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        } else {
+            addConstraint(NSLayoutConstraint(item: iconImage, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1.0, constant: 0))
+        }
         iconImage.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[iconImage(50)]", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[iconImage(50)]-10-[information]-(>=10)-[stasus]-3-|", options: [], metrics: nil, views: viewsDict))
         contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-3-[information(>=40)]-3-|", options: [], metrics: nil, views: viewsDict))

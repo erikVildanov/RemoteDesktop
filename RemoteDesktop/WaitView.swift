@@ -41,8 +41,16 @@ class WaitView: UIView {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[boxView]|", options: [], metrics: nil, views: ["boxView": boxView]))
         
         activityView.translatesAutoresizingMaskIntoConstraints = false
-        activityView.centerXAnchor.constraint(equalTo: boxView.centerXAnchor).isActive = true
-        activityView.centerYAnchor.constraint(equalTo: boxView.centerYAnchor).isActive = true
+        if #available(iOS 9.0, *) {
+            activityView.centerXAnchor.constraint(equalTo: boxView.centerXAnchor).isActive = true
+        } else {
+            addConstraint(NSLayoutConstraint(item: activityView, attribute: .centerX, relatedBy: .equal, toItem: boxView, attribute: .centerX, multiplier: 1.0, constant: 0))
+        }
+        if #available(iOS 9.0, *) {
+            activityView.centerYAnchor.constraint(equalTo: boxView.centerYAnchor).isActive = true
+        } else {
+            addConstraint(NSLayoutConstraint(item: activityView, attribute: .centerY, relatedBy: .equal, toItem: boxView, attribute: .centerY, multiplier: 1.0, constant: 0))
+        }
         boxView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[activityView(80)]", options: [], metrics: nil, views: ["activityView": activityView]))
         boxView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[activityView(80)]", options: [], metrics: nil, views: ["activityView": activityView]))
         
