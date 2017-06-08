@@ -12,13 +12,11 @@ class ScreenView: UIView {
     
     var imageView = UIImageView()
     var scrollView = UIScrollView()
-    //var image = UIImage()
     
     override init (frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = UIColor.white
         imageView.backgroundColor = UIColor.blue
-        //scrollView.backgroundColor = UIColor.yellow
         initializeView()
     }
     
@@ -52,7 +50,6 @@ class ScreenView: UIView {
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: viewsDict))
         
         scrollView.addSubview(imageView)
-        //imageView.image = image
     }
     
 

@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController, UIWebViewDelegate {
     
-    let clientTableDataSource = ClientTableDataSource()
+//    let clientTableDataSource = ClientTableDataSource()
     let loginView = LoginView()
     let waitView = WaitView()
     let deskRollURL = DeskRollURL()

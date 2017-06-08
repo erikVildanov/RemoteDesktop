@@ -10,16 +10,14 @@ import UIKit
 
 class SocketManager: NSObject {
     
-    var curRes = Int()
     var ws: WebSocket
-    fileprivate var parserCompletionHandler:((CGSize) -> Void )?
     
     init(url: String) {
         ws = WebSocket(url)
     }
     
     
-    func getimage(_ data: Data) -> (Images) {
+    func getImage(_ data: Data) -> (Images) {
         let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         let imageModel = Images()
         
@@ -42,7 +40,7 @@ class SocketManager: NSObject {
         return imageModel
     }
     
-    func SessionStarted(_ data: Data) -> Bool {
+    class func sessionStarted(_ data: Data) -> Bool {
         let json = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         
         if let session = json["session"] as? [String: AnyObject] {

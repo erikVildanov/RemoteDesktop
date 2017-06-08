@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B69971E1ED6F8DC00C43089 /* RemoteDesktopUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B69971D1ED6F8DC00C43089 /* RemoteDesktopUITests.swift */; };
 		8B92C9921DCCC4C600F51D8F /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92C9911DCCC4C600F51D8F /* SocketManager.swift */; };
 		8BD3638D1D8D142400DB027F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD3638C1D8D142400DB027F /* AppDelegate.swift */; };
 		8BD3638F1D8D142400DB027F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD3638E1D8D142400DB027F /* ViewController.swift */; };
@@ -32,7 +33,20 @@
 		E3EE63251E59E20A005A1EBF /* ClientTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EE63241E59E20A005A1EBF /* ClientTableDataSource.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8B6997201ED6F8DC00C43089 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8BD363811D8D142300DB027F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8BD363881D8D142300DB027F;
+			remoteInfo = RemoteDesktop;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		8B69971B1ED6F8DC00C43089 /* RemoteDesktopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemoteDesktopUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B69971D1ED6F8DC00C43089 /* RemoteDesktopUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDesktopUITests.swift; sourceTree = "<group>"; };
+		8B69971F1ED6F8DC00C43089 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B92C9911DCCC4C600F51D8F /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		8BD363891D8D142400DB027F /* RemoteDesktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteDesktop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BD3638C1D8D142400DB027F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +77,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8B6997181ED6F8DC00C43089 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BD363861D8D142300DB027F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -74,6 +95,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B69971C1ED6F8DC00C43089 /* RemoteDesktopUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8B69971D1ED6F8DC00C43089 /* RemoteDesktopUITests.swift */,
+				8B69971F1ED6F8DC00C43089 /* Info.plist */,
+			);
+			path = RemoteDesktopUITests;
+			sourceTree = "<group>";
+		};
 		8B92C95D1DCCBE2D00F51D8F /* SourceSocket */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				8BD3638B1D8D142400DB027F /* RemoteDesktop */,
+				8B69971C1ED6F8DC00C43089 /* RemoteDesktopUITests */,
 				8BD3638A1D8D142400DB027F /* Products */,
 				E30504CC1E4CBFF1001A1E9C /* Frameworks */,
 			);
@@ -107,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				8BD363891D8D142400DB027F /* RemoteDesktop.app */,
+				8B69971B1ED6F8DC00C43089 /* RemoteDesktopUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,6 +206,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8B69971A1ED6F8DC00C43089 /* RemoteDesktopUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B6997241ED6F8DC00C43089 /* Build configuration list for PBXNativeTarget "RemoteDesktopUITests" */;
+			buildPhases = (
+				8B6997171ED6F8DC00C43089 /* Sources */,
+				8B6997181ED6F8DC00C43089 /* Frameworks */,
+				8B6997191ED6F8DC00C43089 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B6997211ED6F8DC00C43089 /* PBXTargetDependency */,
+			);
+			name = RemoteDesktopUITests;
+			productName = RemoteDesktopUITests;
+			productReference = 8B69971B1ED6F8DC00C43089 /* RemoteDesktopUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		8BD363881D8D142300DB027F /* RemoteDesktop */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BD3639E1D8D142400DB027F /* Build configuration list for PBXNativeTarget "RemoteDesktop" */;
@@ -197,10 +247,16 @@
 		8BD363811D8D142300DB027F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0800;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = ErikVildanov;
 				TargetAttributes = {
+					8B69971A1ED6F8DC00C43089 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = D423L8TC7V;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 8BD363881D8D142300DB027F;
+					};
 					8BD363881D8D142300DB027F = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = D423L8TC7V;
@@ -222,11 +278,19 @@
 			projectRoot = "";
 			targets = (
 				8BD363881D8D142300DB027F /* RemoteDesktop */,
+				8B69971A1ED6F8DC00C43089 /* RemoteDesktopUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8B6997191ED6F8DC00C43089 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BD363871D8D142300DB027F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -240,6 +304,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8B6997171ED6F8DC00C43089 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B69971E1ED6F8DC00C43089 /* RemoteDesktopUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8BD363851D8D142300DB027F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -268,6 +340,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8B6997211ED6F8DC00C43089 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8BD363881D8D142300DB027F /* RemoteDesktop */;
+			targetProxy = 8B6997201ED6F8DC00C43089 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		8BD363901D8D142400DB027F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -288,6 +368,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8B6997221ED6F8DC00C43089 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = D423L8TC7V;
+				INFOPLIST_FILE = RemoteDesktopUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = BOTcop.RemoteDesktopUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = RemoteDesktop;
+			};
+			name = Debug;
+		};
+		8B6997231ED6F8DC00C43089 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				DEVELOPMENT_TEAM = D423L8TC7V;
+				INFOPLIST_FILE = RemoteDesktopUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = BOTcop.RemoteDesktopUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = RemoteDesktop;
+			};
+			name = Release;
+		};
 		8BD3639C1D8D142400DB027F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -387,6 +497,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = D423L8TC7V;
 				INFOPLIST_FILE = RemoteDesktop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BOTcompany.RemoteDesktop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -400,6 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = D423L8TC7V;
 				INFOPLIST_FILE = RemoteDesktop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BOTcompany.RemoteDesktop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -410,6 +522,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8B6997241ED6F8DC00C43089 /* Build configuration list for PBXNativeTarget "RemoteDesktopUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8B6997221ED6F8DC00C43089 /* Debug */,
+				8B6997231ED6F8DC00C43089 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8BD363841D8D142300DB027F /* Build configuration list for PBXProject "RemoteDesktop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

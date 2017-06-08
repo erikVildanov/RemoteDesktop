@@ -75,7 +75,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         socket.ws.event.message = { message in
             if let text = message as? String {
                 let data = text.data(using: .utf8)!
-                guard !self.socket.SessionStarted(data) else {
+                guard !SocketManager.sessionStarted(data) else {
                     print("started false")
                     return }
                 
@@ -88,7 +88,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     self.setZoomScale()
                     UIGraphicsBeginImageContext(self.size)
                 } else if self.size.height > 0{
-                    self.screenView.imageView.image = self.getMixedImg(images: self.socket.getimage(data))
+                    self.screenView.imageView.image = self.getMixedImg(images: self.socket.getImage(data))
                 }
             }
         }
